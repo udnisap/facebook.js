@@ -162,7 +162,26 @@ var FB = FB || function () {
       /**
        * Types of messages that can be sent
        */
-      getMessageTypes: messageTypes
+      getMessageTypes: messageTypes,
+      /**
+       * Get Last message from a user
+       * @param userid
+       * @param offset
+       * @param limit
+       * @param callback with array of messages
+       */
+      getMessages : function(userid,offset, limit, callback){
+        offset = offset ? offset : 0;
+        limit = limit ? limit : 10;
+        messages.getThreadMessagesRange("user:"+userid, offset, limit, function(messages){
+          var refined = _.map(messages, function(msg){
+            var r = _.pick(msg, "body", "author", "timestamp");
+            r.raw = msg;
+            return r;
+          })
+          callback(refined);
+        });
+      }
     };
   }();
   api.title = function () {
