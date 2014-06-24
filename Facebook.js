@@ -129,5 +129,28 @@ var FB = FB || function () {
       toggleSidebar: chat.toggleSidebar
     };
   }
+
+  api.title = function(){
+    var dt = require('DocumentTitle');
+    return {
+      /**
+       * Get the title
+       * @returns {string}
+       */
+      get : dt.get,
+      /**
+       * Sets the title
+       * @params title
+       */
+      set : dt.set,
+      /**
+       * Blinks the title
+       * @params title
+       */
+      blink : dt.blink
+    }
+  }
+
+
   return api;
 }(this);
