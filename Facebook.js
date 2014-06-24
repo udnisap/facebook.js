@@ -116,7 +116,8 @@ var FB = FB || function () {
     var chatSideBar = require('Chat'),
       chatOpenTab = require('ChatOpenTab'),
       available = require('AvailableList'),
-      messages = require('MercuryMessages').get();
+      messages = require('MercuryMessages').get(),
+      messageTypes = require('MercurySourceType');
     return {
       /**
        * Close the side bar
@@ -141,17 +142,22 @@ var FB = FB || function () {
        * Get Online Friend List
        * @returns {array}
        */
-      getOnlineFriends : available.getOnlineIDs,
+      getOnlineFriends: available.getOnlineIDs,
       /**
        * Send a web chat to a friend
        * @param userid
        * @param msg
+       * @param source @getMessageTypes for types
        */
-      sendWebChat : function(userid , msg){
-        var fbwebchat = messages.constructUserGeneratedMessageObject(msg,"source:chat:web", "user:"+userid);
+      sendWebChat: function (userid, msg, source) {
+        source = source in messageTypes ? source : messageTypes.CHAT_WEB;
+        var fbwebchat = messages.constructUserGeneratedMessageObject(msg, source, "user:" + userid);
         messages.sendMessage(fbwebchat);
-      }
-
+      },
+      /**
+       * Types of messages that can be sent
+       */
+      getMessageTypes: messageTypes
     };
   }();
   api.title = function () {
