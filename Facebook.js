@@ -112,43 +112,51 @@ var FB = FB || function () {
   /**
    * Chat Sidebar
    */
-  api.sidebar = function () {
-    var chat = require('Chat');
+  api.chat = function () {
+    var chatSideBar = require('Chat'),
+      chatOpenTab = require('ChatOpenTab');
     return {
       /**
        * Close the side bar
        */
-      closeBuddyList: chat.closeBuddyList,
+      closeChatList: chatSideBar.closeBuddyList,
       /**
        * Open the side bar
        */
-      openBuddyList: chat.openBuddyList,
+      openChatList: chatSideBar.openBuddyList,
       /**
        * Toggle the side bar
        */
-      toggleSidebar: chat.toggleSidebar
+      toggleSidebar: chatSideBar.toggleSidebar,
+      /**
+       * Opens the chat window
+       * @param userId
+       */
+      openChatWindow: function (userId) {
+        chatOpenTab.openUserTab(userId, "ordered_list", {global_slot: 5});
+      }
     };
   }();
 
-  api.title = function(){
+  api.title = function () {
     var dt = require('DocumentTitle');
     return {
       /**
        * Get the title
        * @returns {string}
        */
-      get : dt.get,
+      get: dt.get,
       /**
        * Sets the title
        * @params title
        */
-      set : dt.set,
+      set: dt.set,
       /**
        * Blinks the title
        * @params title
        * @returns {object} run stop to stop blink
        */
-      blink : dt.blink
+      blink: dt.blink
     }
   }();
 
