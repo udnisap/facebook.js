@@ -49,63 +49,85 @@ var FB = FB || function () {
     }
   }();
 
-  var api = {
-      notifications : {
-        unread : {},
-        read : {}
-      }
-    };
+  var api = {};
+
   /**
    * Get details about the logged in user
    */
-  var cu = require('CurrentUser');
-  api.currentUser = {
-    /**
-     * User id
-     * @returns {string}
-     */
-    getID: cu.getID,
-    /**
-     * No idea
-     * @returns {boolean}
-     */
-    isEmployee: cu.isEmployee,
-    /**
-     * No idea
-     * @returns {boolean}
-     */
-    isGray: cu.isGray,
-    /**
-     * User logged in or not
-     * @returns {boolean}
-     */
-    isLoggedIn: cu.isLoggedIn,
-    /**
-     * No idea
-     * @returns {boolean}
-     */
-    isLoggedInNow : cu.isLoggedInNow
+  api.currentUser = function () {
+    var cu = require('CurrentUser');
+    return  {
+      /**
+       * User id
+       * @returns {string}
+       */
+      getID: cu.getID,
+      /**
+       * No idea
+       * @returns {boolean}
+       */
+      isEmployee: cu.isEmployee,
+      /**
+       * No idea
+       * @returns {boolean}
+       */
+      isGray: cu.isGray,
+      /**
+       * User logged in or not
+       * @returns {boolean}
+       */
+      isLoggedIn: cu.isLoggedIn,
+      /**
+       * No idea
+       * @returns {boolean}
+       */
+      isLoggedInNow: cu.isLoggedInNow
+    }
   };
 
+  /**
+   * Notifications API
+   */
+  api.notifications = function () {
+    var ns = require('NotificationStore');
+    var unread = {
+      /**
+       * This is a async request. callback will be called with unread notifications.
+       * @param callback function
+       */
+      list: ns.getAll,
+      /**
+       * Get unread notification count
+       * @returns {int}
+       */
+      count: ns.getCount
+    }, read = {};
+
+    return{
+      unread: unread,
+      read: read
+    }
+  }
 
   /**
-   * This is a async request. callback will be called with unread notifications.
-   * @param callback function
+   * Chat Sidebar
    */
-  api.notifications.unread.list = function(callback){
-    require('NotificationStore').getAll(callback);
+  api.sidebar = function () {
+    var chat = require('Chat');
+    return {
+      /**
+       * Close the side bar
+       */
+      closeBuddyList: chat.closeBuddyList,
+      /**
+       * Open the side bar
+       */
+      openBuddyList: chat.openBuddyList,
+      /**
+       * Toggle the side bar
+       */
+      toggleSidebar: chat.toggleSidebar
+    };
   }
-
-  /**
-   * Get unread notification count
-   * @returns {*}
-   */
-  api.notifications.unread.count = function(){
-    return require('NotificationCounter').getCount();
-  }
-
-
-  return {
-    api : api
-  }
+  return api;
 }(this);
