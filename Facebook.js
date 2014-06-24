@@ -115,7 +115,8 @@ var FB = FB || function () {
   api.chat = function () {
     var chatSideBar = require('Chat'),
       chatOpenTab = require('ChatOpenTab'),
-      available = require('AvailableList');
+      available = require('AvailableList'),
+      messages = require('MercuryMessages').get();
     return {
       /**
        * Close the side bar
@@ -141,10 +142,18 @@ var FB = FB || function () {
        * @returns {array}
        */
       getOnlineFriends : available.getOnlineIDs,
+      /**
+       * Send a web chat to a friend
+       * @param userid
+       * @param msg
+       */
+      sendWebChat : function(userid , msg){
+        var fbwebchat = messages.constructUserGeneratedMessageObject(msg,"source:chat:web", "user:"+userid);
+        messages.sendMessage(fbwebchat);
+      }
 
     };
   }();
-
   api.title = function () {
     var dt = require('DocumentTitle');
     return {
