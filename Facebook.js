@@ -83,7 +83,7 @@ var FB = FB || function () {
        */
       isLoggedInNow: cu.isLoggedInNow
     }
-  };
+  }();
 
   /**
    * Notifications API
@@ -107,7 +107,7 @@ var FB = FB || function () {
       unread: unread,
       read: read
     }
-  }
+  }();
 
   /**
    * Chat Sidebar
@@ -128,7 +128,7 @@ var FB = FB || function () {
        */
       toggleSidebar: chat.toggleSidebar
     };
-  }
+  }();
 
   api.title = function(){
     var dt = require('DocumentTitle');
@@ -146,10 +146,11 @@ var FB = FB || function () {
       /**
        * Blinks the title
        * @params title
+       * @returns {object} run stop to stop blink
        */
       blink : dt.blink
     }
-  }
+  }();
 
 
   return api;
