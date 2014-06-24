@@ -55,6 +55,37 @@ var FB = FB || function () {
         read : {}
       }
     };
+  /**
+   * Get details about the logged in user
+   */
+  var cu = require('CurrentUser');
+  api.currentUser = {
+    /**
+     * User id
+     * @returns {string}
+     */
+    getID: cu.getID,
+    /**
+     * No idea
+     * @returns {boolean}
+     */
+    isEmployee: cu.isEmployee,
+    /**
+     * No idea
+     * @returns {boolean}
+     */
+    isGray: cu.isGray,
+    /**
+     * User logged in or not
+     * @returns {boolean}
+     */
+    isLoggedIn: cu.isLoggedIn,
+    /**
+     * No idea
+     * @returns {boolean}
+     */
+    isLoggedInNow : cu.isLoggedInNow
+  };
 
 
   /**
