@@ -114,7 +114,8 @@ var FB = FB || function () {
    */
   api.chat = function () {
     var chatSideBar = require('Chat'),
-      chatOpenTab = require('ChatOpenTab');
+      chatOpenTab = require('ChatOpenTab'),
+      available = require('AvailableList');
     return {
       /**
        * Close the side bar
@@ -134,7 +135,13 @@ var FB = FB || function () {
        */
       openChatWindow: function (userId) {
         chatOpenTab.openUserTab(userId, "ordered_list", {global_slot: 5});
-      }
+      },
+      /**
+       * Get Online Friend List
+       * @returns {array}
+       */
+      getOnlineFriends : available.getOnlineIDs,
+
     };
   }();
 
