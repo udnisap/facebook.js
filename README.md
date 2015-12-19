@@ -22,3 +22,7 @@ No Documentation other than the [Annotated source code](https://github.com/rumal
 #About facebook.js
 This is inspired by [gmail.js](https://github.com/KartikTalwar/gmail.js/tree/master) for GMail. I was bored today and decided to do decode the minified, scrambled JS on faceook.com. I was managed to find their dependency injection mechanism and able to tap into their client api. This is what I could come up with. [#hackfb](https://twitter.com/hashtag/hackfb)
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/udnisap/facebook.js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
