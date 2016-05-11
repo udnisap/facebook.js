@@ -37,5 +37,8 @@
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "gulp-concat": "2.6.0"
+  }
 }
